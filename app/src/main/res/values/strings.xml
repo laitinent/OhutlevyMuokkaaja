@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OhutlevyMuokkaaja</string>
+    <string name="action_settings">Settings</string>
+    <string name="tPaksuus">Levyn paksuus (mm)</string>
+    <string name="tKulma">Avautumiskulma (aste)</string>
+    <string name="tSäde">Kaarevuussäde (mm)</string>
+    <string name="tLaskePainike">Laske kertoimet</string>
+</resources>
