@@ -31,28 +31,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etKulma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="188dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginBottom="8dp"
-        android:labelFor="@+id/etKulma"
-        android:text="@string/tKulma"
-        app:layout_constraintBottom_toTopOf="@+id/etKulma"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
         android:id="@+id/etPaksuus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

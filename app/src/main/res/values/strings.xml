@@ -5,4 +5,6 @@
     <string name="tKulma">Avautumiskulma (aste)</string>
     <string name="tSäde">Kaarevuussäde (mm)</string>
     <string name="tLaskePainike">Laske kertoimet</string>
+    <string name="tPituusA">Levyn pituus A (mm)</string>
+    <string name="tPituusB">Levyn pituus B (mm)</string>
 </resources>

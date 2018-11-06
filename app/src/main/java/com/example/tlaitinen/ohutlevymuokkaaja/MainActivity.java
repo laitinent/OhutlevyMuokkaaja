@@ -1,5 +1,6 @@
 package com.example.tlaitinen.ohutlevymuokkaaja;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etPaksuus;
     EditText etSäde;
     EditText etKulma;
-    KerroinLaskija laskija=null;
+    //KerroinLaskija laskija=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         etPaksuus=findViewById(R.id.etPaksuus);
 
         button.setOnClickListener(view -> {
-            if(laskija==null ){ laskija = new KerroinLaskija(Double.parseDouble(etPaksuus.getText().toString())); }
+            //if(laskija==null ){ laskija = new KerroinLaskija(Double.parseDouble(etPaksuus.getText().toString())); }
             // zero check
             if(Double.parseDouble(etPaksuus.getText().toString())==0) {
                 Snackbar.make(view, "Levyn paksuus tulee olla > 0 mm", Snackbar.LENGTH_LONG)
@@ -71,16 +72,30 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        fab.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View view) {
+                                       Intent i = new Intent(MainActivity.this, Main2Activity.class);
+                                       i.putExtra("paksuus",Float.parseFloat(etPaksuus.getText().toString()));
+                                       i.putExtra("säde",Float.parseFloat(etSäde.getText().toString()));
+                                       if(etPaksuus.length()>0 && Float.parseFloat( etPaksuus.getText().toString())>0 &&
+                                               etSäde.length()>0 && Float.parseFloat( etSäde.getText().toString())>0)
+                                       {
+                                           startActivity(i);
+                                       }
+                                   }
+                               }
+
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+        );
     }
 
     private void laskeJaNäytäTulos() {
-        double k = laskija.getKerroinK(//laskija.getKorjaavaTekijä(
-                //Double.parseDouble(etKulma.getText().toString()),
-                Double.parseDouble(etSäde.getText().toString())
+        double k = KerroinLaskija.getKerroinK(
+                Double.parseDouble(etSäde.getText().toString()),
+                Double.parseDouble(etPaksuus.getText().toString())
                 );
-        String s = String.format(Locale.getDefault(),"k = %.2f\nY = %.2f",k,laskija.getKerroinY(k));
+        String s = String.format(Locale.getDefault(),"k = %.2f\nY = %.2f",k,KerroinLaskija.getKerroinY(k));
         tvOutput.setText(s);
     }
 
