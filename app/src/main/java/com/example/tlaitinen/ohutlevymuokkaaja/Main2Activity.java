@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ public class Main2Activity extends AppCompatActivity implements TextWatcher {
     EditText etPituusA, etPituusB;
     TextView tvOutput;
     //KerroinLaskija laskija;
+
+    String format = "<small>Korjaava tekijä</small><br>v = %.2f mm<br><small>Oikaistu pituus</small><br>a+b+v &#x2248; %d mm";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,9 @@ public class Main2Activity extends AppCompatActivity implements TextWatcher {
 
         etKulma.addTextChangedListener(this);
         etPituusA.addTextChangedListener(this);
-        etPituusA.addTextChangedListener(this);
+        etPituusB.addTextChangedListener(this);
+
+        etKulma.requestFocus();
     }
 
     private void laskeJaNäytäTulos() {
@@ -45,10 +51,13 @@ public class Main2Activity extends AppCompatActivity implements TextWatcher {
         double a = (etPituusA.length()==0)?0:Double.parseDouble(etPituusA.getText().toString());
         double b = (etPituusB.length()==0)?0:Double.parseDouble(etPituusB.getText().toString());
         String s;
-        s= String.format(Locale.getDefault(),"Korjaava tekijä\nv = %.2f mm\nOikaistu pituus\na+b+v= %d mm",v, (int)Math.round(a+b+v));
-        tvOutput.setText(s);
+        s= String.format(Locale.getDefault(),format,v, (int)Math.round(a+b+v));
+        Spanned myStringSpanned = Html.fromHtml(s, null, null);
+        tvOutput.setText(myStringSpanned, TextView.BufferType.SPANNABLE);
     }
 
+
+    // TextWatcher interface implementation
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
