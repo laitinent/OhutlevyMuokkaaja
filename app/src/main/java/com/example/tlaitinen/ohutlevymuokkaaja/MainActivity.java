@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(etPaksuus.getText().length()!=0 )
+                if(etPaksuus.getText().length()!=0 && Double.parseDouble(etPaksuus.getText().toString())!=0)
                 {
                     laskeJaNäytäTulos();
                 }
